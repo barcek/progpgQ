@@ -6,6 +6,28 @@ All or part of the subtree and its file content can be incorporated into a large
 
 In addition, the 'config' folder applies a useful destructure-truncate-export approach to environment variables to reduce environment variable identifier length and uses `NODE_ENV` to determine the correct set of database environment variables.
 
+## Getting started
+
+A table can be created by creating an instance of the `Table` class, passing the following:
+
+- the name of the table as a string;
+- an array of strings, each containing the SQL for a single column.
+
+```js
+const entriesTable = new Table('entries', [
+    'id SERIAL PRIMARY KEY',
+    'entry_1 VARCHAR(255) NOT NULL',
+    'entry_2 VARCHAR(255) NOT NULL',
+    'entry_3 VARCHAR(255) NOT NULL'
+]);
+```
+
+A set of CRUD operations for the table can then be instantiated using the `CRUD` class, passing an array of strings, each string the name of a column in the table.
+
+```js
+const oddEntriesCRUD = entriesTable.generateCRUD(['entry_1', 'entry_3']);
+```
+
 ## config/
 
 The 'config' directory contains a single 'index.js' file.
