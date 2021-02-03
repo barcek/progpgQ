@@ -28,6 +28,15 @@ A set of CRUD operations for the table can then be instantiated using the `CRUD`
 const oddEntriesCRUD = entriesTable.generateCRUD(['entry_1', 'entry_3']);
 ```
 
+Each CRUD instance has a `label` property, a string created by hyphenating the column names passed. The instance is assigned to the `cruds` property on the Table instance with its `label` property as the key.
+
+Each CRUD instance also exposes a `summarize` method returning a string overview of a given operation, as well as a `summarizeAll' method returning all overviews for that operation set.
+
+```js
+oddEntriesCRUD.summarize('create');
+oddEntriesCRUD.summarizeAll();
+```
+
 ## config/
 
 The 'config' directory contains a single 'index.js' file.
@@ -46,11 +55,11 @@ The 'pool.js' file requires the `pg` package and the `DB` environment variables 
 
 ### crud.js
 
-The 'crud.js' file requires `pool` and exports the constructor function `CRUD` taking arguments to create a set of standard CRUD queries, specifically `create`, `readById`, `readAll`, `update`, `delete` and `deleteAll`.
+The 'crud.js' file requires `pool` and exports the constructor function `CRUD`, which takes arguments to create a set of standard CRUD queries, specifically `create`, `readById`, `readAll`, `update`, `delete` and `deleteAll`.
 
 ### table.js
 
-The 'table.js' file requires `pool` and `CRUD` and exports the constructor function `Table` receiving arguments to create a table if the table does not exist. 
+The 'table.js' file requires `pool` and `CRUD` and exports the constructor function `Table`, which takes arguments to create a table if the table does not exist. 
 
 ## utils/
 
