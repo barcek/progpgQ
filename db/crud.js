@@ -34,18 +34,43 @@ function CRUD(table, columns) {
     this.pairString = buildPairString(columns);
 
     this.templates = {
-        create: `INSERT INTO ${table} (${this.colString}) VALUES (${this.varString}) RETURNING *;`,
-        readById: `SELECT * FROM ${table} WHERE id = $1;`,
-        readAll: `SELECT * FROM ${table};`,
-        update: `UPDATE ${table} SET ${this.pairString} WHERE id = $${columns.length + 1} RETURNING *;`,
-        deleteById: `DELETE FROM ${table} WHERE id = $1;`,
-        deleteAll: `DELETE FROM ${table};`
+        create: {
+            text: `INSERT INTO ${table} (${this.colString}) VALUES (${this.varString}) RETURNING *;`,
+            expected: columns.length
+        },
+        readById: {
+            text: `SELECT * FROM ${table} WHERE id = $1;`,
+            expected: 1
+        },
+        readAll: {
+            text: `SELECT * FROM ${table};`,
+            expected: 0
+        },
+        update: {
+            text: `UPDATE ${table} SET ${this.pairString} WHERE id = $${columns.length + 1} RETURNING *;`,
+            expected: columns.length + 1
+        },
+        deleteById: {
+            text: `DELETE FROM ${table} WHERE id = $1;`,
+            expected: 1
+        },
+        deleteAll: {
+            text: `DELETE FROM ${table};`,
+            expected: 0
+        }
     };
 
-    this.run = function(operation, values) {
+    this.run = function(operation, values=[]) {
+
+        const expected = this.templates[operation].expected;
+        const received = values.length;
+
+        if (expected != received) {
+            throw new Error(`CRUD '${operation}' expects ${expected} value(s), but received ${received}`)
+        };
         return pool.query({
             name: operation,
-            text: this.templates[operation],
+            text: this.templates[operation].text,
             values: values
         });
     };
