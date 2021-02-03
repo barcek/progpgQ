@@ -29,6 +29,9 @@ const buildPairString = columns => {
 
 function CRUD(table, columns) {
 
+    this.table = table;
+    this.label = columns.join('-');
+
     this.colString = commaSeparate(columns);
     this.varString = buildVarString(columns);
     this.pairString = buildPairString(columns);
@@ -60,13 +63,23 @@ function CRUD(table, columns) {
         }
     };
 
-    this.run = function(operation, values=[]) {
-
+    this.summarize = function(operation) {
         const expected = this.templates[operation].expected;
-        const received = values.length;
+        const text = this.templates[operation].text;
+        return `${this.table} ${this.label} '${operation}' expects ${expected} value(s) for query '${text}'`;
+    };
 
-        if (expected != received) {
-            throw new Error(`CRUD '${operation}' expects ${expected} value(s), but received ${received}`)
+    this.summarizeAll = function() {
+        const explanations = [];
+        for (let key of Object.keys(this.templates)) {
+            explanations.push(this.summarize(key));
+        };
+        return explanations.join('\n');
+    };
+
+    this.run = function(operation, values=[]) {
+        if (this.templates[operation].expected != values.length) {
+            throw new Error(`${this.summarize(operation)}, but received ${values.length}`)
         };
         return pool.query({
             name: operation,

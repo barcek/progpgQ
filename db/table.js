@@ -16,13 +16,16 @@ function Table(name, tableColumns) {
 
     this.tableColString = commaSeparate(tableColumns);
     this.template = `CREATE TABLE IF NOT EXISTS ${name} (${this.tableColString});`;
+    this.cruds = {};
 
     (async function(template) {
         await pool.query(template);
     })(this.template)
 
     this.generateCRUD = function(queryColumns) {
-        return new CRUD(name, queryColumns);
+        const crud = new CRUD(name, queryColumns);
+        this.cruds[crud.label] = crud;
+        return crud;
     };
 };
 
