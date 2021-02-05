@@ -37,6 +37,12 @@ oddEntriesCRUD.summarize('create');
 oddEntriesCRUD.summarizeAll();
 ```
 
+The unit tests use the dev dependencies mocha and chai and can be run with the following command:
+
+```shell
+npm test
+```
+
 ## config/
 
 The 'config' directory contains a single 'index.js' file.
@@ -47,23 +53,31 @@ The 'index.js' file requires the `dotenv` package, destructures environment vari
 
 ## db/
 
-The 'db' directory contains three files: 'pool.js', 'table.js' and 'crud.js'.
+The 'db' directory contains four files: 'index.js', 'pool.js', 'table.js' and 'crud.js'.
+
+### index.js
+
+The 'index.js' file destructures `Table` and `pool` from their modules and exports the `Table` class and an `endPool` function.
 
 ### pool.js
 
-The 'pool.js' file requires the `pg` package and the `DB` environment variables to create `pool` and exports this.
+The 'pool.js' file requires the `pg` package and the `DB` environment variables to create a pool exports this as `pool`.
 
 ### crud.js
 
-The 'crud.js' file requires `pool` and exports the constructor function `CRUD`, which takes arguments to create a set of standard CRUD queries, specifically `create`, `readById`, `readAll`, `update`, `delete` and `deleteAll`.
+The 'crud.js' file destructures `pool` from its module, as `defaultPool` to support dependency injection, and exports the constructor function `CRUD`, which takes arguments to create a set of standard CRUD queries, specifically `create`, `readById`, `readAll`, `update`, `delete` and `deleteAll`.
 
 ### table.js
 
-The 'table.js' file requires `pool` and `CRUD` and exports the constructor function `Table`, which takes arguments to create a table if the table does not exist. 
+The 'table.js' file destructures `pool`  and `CRUD` from their modules, each with the 'default-' prefix to support dependency injection, and exports the constructor function `Table`, which takes arguments to create a table if the table does not exist. 
 
 ## utils/
 
 The 'utils' directory contains a single 'index.js' file for the sole utility function currently used in both 'table.js' and 'crud.js'.
+
+## test/
+
+The 'test' directory contains three files: 'db.test.js' with test resources and one unit test each for the `Table` and `CRUD` modules.
 
 ## .env
 
@@ -74,4 +88,4 @@ The '.env' file contains two sets of database environment variables with placeho
 The following are possible next steps in the development of the code base. Pull requests are welcome for these and any other potential improvements.
 
 - further generalize the current classes for greater flexibility
-- add further query types
+- add additional query types
