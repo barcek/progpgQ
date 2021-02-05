@@ -29,7 +29,6 @@ const buildPairString = crudColNames => {
 
 function CRUD(tableName, crudColNames, pool=defaultPool) {
 
-    this.table = tableName;
     this.label = crudColNames.join('-');
 
     this.colString = commaSeparate(crudColNames);
@@ -66,15 +65,15 @@ function CRUD(tableName, crudColNames, pool=defaultPool) {
     this.summarize = operation => {
         const expected = this.templates[operation].expected;
         const text = this.templates[operation].text;
-        return `${this.table} ${this.label} '${operation}' expects ${expected} value(s) for query '${text}'`;
+        return `${tableName} ${this.label} '${operation}' expects ${expected} value(s) for query '${text}'`;
     };
 
     this.summarizeAll = () => {
-        const explanations = [];
+        const summaries = [];
         for (let key of Object.keys(this.templates)) {
-            explanations.push(this.summarize(key));
+            summaries.push(this.summarize(key));
         };
-        return explanations.join('\n');
+        return summaries.join('\n');
     };
 
     this.run = (operation, values=[]) => {
