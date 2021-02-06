@@ -37,7 +37,13 @@ oddEntriesCRUD.summarize('create');
 oddEntriesCRUD.summarizeAll();
 ```
 
-The unit tests use the dev dependencies mocha and chai and can be run with the following command:
+The unit tests use the npm packages `mocha` and `chai` as dev dependencies and can be run with the following command:
+
+```shell
+mocha
+```
+
+This command is the current content of the 'test' script in the 'package.json' file, which can be run with the following:
 
 ```shell
 npm test
