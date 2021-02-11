@@ -17,21 +17,25 @@ const db = require(path.resolve(__dirname, '../db'));
 
 describe('Table', () => {
 
-    const TableInstanceResult = new Table(vals.table.name, vals.table.colNames, poolTable, CRUD);
+    const TableInstanceResult = new Table(vals.table.name, vals.table.colNames,
+        poolTable, CRUD);
 
     it('can be instantiated', () => {
         assert.instanceOf(TableInstanceResult, Table);
     });
 
-    it('adds a table creation query string to the "template" property (for 3 test columns)', () => {
+    it('adds a table creation query string to the "template" property ' +
+        '(for 3 test columns)', () => {
         const tableTemplateResult = TableInstanceResult.template;
         assert.equal(tableTemplateResult, vals.table.template);
     });
 
     describe('.createTable()', () => {
 
-        it('passes the "template" property value & returns a response object (w/ corr. "command" property value)', async () => {
-            const tableCreationResult = await TableInstanceResult.createTable(vals.table.template, poolTable);
+        it('passes the "template" property value & returns a response object ' +
+            '(w/ corr. "command" property value)', async () => {
+            const tableCreationResult = await
+                TableInstanceResult.createTable(vals.table.template, poolTable);
             assert.include(tableCreationResult, vals.table.response);
         });
 
@@ -43,14 +47,17 @@ describe('Table', () => {
 
     describe('.generateCRUD()', () => {
 
-        const CRUDInstanceResult = TableInstanceResult.generateCRUD(vals.crud.colNames, CRUD);
+        const CRUDInstanceResult =
+            TableInstanceResult.generateCRUD(vals.crud.colNames, CRUD);
 
-        it('passes column names (for 2 test columns) & returns a CRUD instance (w/ corr. "label" property value)', () => {
+        it('passes column names (for 2 test columns) & returns a CRUD instance ' +
+            '(w/ corr. "label" property value)', () => {
             const CRUDInstanceLabelResult = CRUDInstanceResult.label;
             assert.equal(CRUDInstanceLabelResult, vals.crud.label);
         });
 
-        it('adds a CRUD instance to the table "cruds" property by instance "label" property value', () => {
+        it('adds a CRUD instance to the table "cruds" property ' +
+            'by instance "label" property value', () => {
             const crudsPropertyResult = TableInstanceResult.cruds[vals.crud.label];
             assert.typeOf(crudsPropertyResult, 'object');
         });
