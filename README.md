@@ -1,8 +1,8 @@
 # progpgQ
 
-A directory subtree for programmatic table and CRUD query creation in Node.js, requiring the `pg` package for PostgreSQL.
+A fileset for programmatic table and CRUD query creation in Node.js using the `pg` package for PostgreSQL.
 
-All or part of the subtree and its file content can be incorporated into a larger project to abstract away the query code itself.
+All or part of the fileset can be incorporated into a larger project to abstract away the core query code.
 
 In addition, the 'config' folder applies a useful destructure-truncate-export approach to environment variables to reduce environment variable identifier length and uses `NODE_ENV` to determine the correct set of database environment variables.
 
@@ -71,11 +71,11 @@ The 'pool.js' file requires the `pg` package and the `DB` environment variables 
 
 ### crud.js
 
-The 'crud.js' file destructures `pool` from its module, as `defaultPool` to support dependency injection, and exports the constructor function `CRUD`, which takes arguments to create a set of standard CRUD queries, specifically `create`, `readById`, `readAll`, `update`, `delete` and `deleteAll`.
+The 'crud.js' file destructures `pool` from its module, as `defaultPool` to support dependency injection, and exports the constructor function `CRUD`, which takes arguments to create a set of standard CRUD queries, specifically `create`, `readById`, `readAll`, `update`, `deleteById` and `deleteAll`.
 
 ### table.js
 
-The 'table.js' file destructures `pool`  and `CRUD` from their modules, each with the 'default-' prefix to support dependency injection, and exports the constructor function `Table`, which takes arguments to create a table if the table does not exist. 
+The 'table.js' file destructures `pool`  and `CRUD` from their modules, each with the 'default-' prefix to support dependency injection, and exports the constructor function `Table`, which takes arguments to create a table if the table does not exist.
 
 ## utils/
 
