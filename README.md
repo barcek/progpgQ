@@ -6,6 +6,8 @@ All or part of the fileset can be incorporated into a larger project to abstract
 
 In addition, the 'config' folder applies a useful destructure-truncate-export approach to environment variables to reduce environment variable identifier length and uses `NODE_ENV` to determine the correct set of database environment variables.
 
+A major part of the code is currently used in the [docNxgres](https://github.com/barcek/docNxgres) containerized back end.
+
 ## Getting started
 
 A table can be created by creating an instance of the `Table` class, passing the following:
@@ -16,16 +18,16 @@ A table can be created by creating an instance of the `Table` class, passing the
 ```js
 const entriesTable = new Table('entries', [
     'id SERIAL PRIMARY KEY',
-    'entry_1 VARCHAR(255) NOT NULL',
-    'entry_2 VARCHAR(255) NOT NULL',
-    'entry_3 VARCHAR(255) NOT NULL'
+    'column_1 VARCHAR(255) NOT NULL',
+    'column_2 VARCHAR(255) NOT NULL',
+    'column_3 VARCHAR(255) NOT NULL'
 ]);
 ```
 
 A set of CRUD operations for the table can then be instantiated using the `CRUD` class, passing an array of strings, each string the name of a column in the table.
 
 ```js
-const oddEntriesCRUD = entriesTable.generateCRUD(['entry_1', 'entry_3']);
+const oddColumnsCRUD = entriesTable.generateCRUD(['column_1', 'column_3']);
 ```
 
 Each CRUD instance has a `label` property, a string created by hyphenating the column names passed. The instance is assigned to the `cruds` property on the Table instance with its `label` property as the key.
@@ -33,8 +35,14 @@ Each CRUD instance has a `label` property, a string created by hyphenating the c
 Each CRUD instance also exposes a `summarize` method returning a string overview of a given operation, as well as a `summarizeAll' method returning all overviews for that operation set.
 
 ```js
-oddEntriesCRUD.summarize('create');
-oddEntriesCRUD.summarizeAll();
+oddColumnsCRUD.summarize('create');
+oddColumnsCRUD.summarizeAll();
+```
+
+A CRUD operation can be performed by calling the `run` method with the first argument the operation name as a string and the second argument the array of expected values.
+
+```js
+const response = await oddColumnsCRUD.run('create', ['value_1', 'value_3']);
 ```
 
 The unit tests use the npm packages `mocha` and `chai` as dev dependencies and can be run with the following command:
