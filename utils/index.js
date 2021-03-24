@@ -1,13 +1,15 @@
 /*
-    Functions
+    Requirements
 */
 
-const commaSeparate = arr => arr.length > 1 ? arr.join(', ') : arr[0];
+const path = require('path');
+
+const { commaSpaceJoin } = require(path.resolve(__dirname, './format.js'));
 
 /*
     Exports
 */
 
 module.exports = {
-    commaSeparate
+    commaSpaceJoin
 };
