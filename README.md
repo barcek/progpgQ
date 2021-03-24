@@ -87,7 +87,15 @@ The 'table.js' file destructures `pool`  and `CRUD` from their modules, each wit
 
 ## utils/
 
-The 'utils' directory contains a single 'index.js' file for the sole utility function currently used in both 'table.js' and 'crud.js'.
+The 'utils' directory contains two files: 'index.js' and 'format.js'.
+
+### index.js
+
+The 'index.js' file destructures the sole utility function from 'format.js' and exports it.
+
+### format.js
+
+The 'format.js' file defines and exports a single utility function, `commaSpaceJoin`, currently used in both 'table.js' and 'crud.js'.
 
 ## test/
 
