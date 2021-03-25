@@ -4,7 +4,7 @@
 
 const path = require('path');
 
-const db = require(path.resolve(__dirname, '../db'));
+const db = require(path.resolve(__dirname, '../../db'));
 
 /*
     Test values
