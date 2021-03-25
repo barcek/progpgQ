@@ -45,6 +45,8 @@ A CRUD operation can be performed by calling the `run` method with the first arg
 const response = await oddColumnsCRUD.run('create', ['value_1', 'value_3']);
 ```
 
+### Unit tests
+
 The unit tests use the npm packages `mocha` and `chai` as dev dependencies and can be run with the following command:
 
 ```shell
@@ -99,7 +101,7 @@ The 'format.js' file defines and exports a single utility function, `commaSpaceJ
 
 ## test/
 
-The 'test' directory contains three files: 'db.test.js' with test resources and one unit test each for the `Table` and `CRUD` modules.
+The 'test' directory contains two subdirectories: 'db/' and 'utils/'. The subdirectory 'db/' contains three files: 'db.test.js' with test resources and one unit test file each for the `Table` and `CRUD` modules. The subdirectory 'utils/' contains two files: 'utils.test.js' with test resources and 'format.test.js' for the utility function in 'utils/format.js'.
 
 ## .env
 
