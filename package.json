@@ -14,6 +14,10 @@
   ],
   "author": "barcek",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/barcek/progpgQ.git"
+  },
   "dependencies": {
     "dotenv": "^8.2.0",
     "pg": "^8.4.1"
