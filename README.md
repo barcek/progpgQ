@@ -30,6 +30,12 @@ A set of CRUD operations for the table can then be instantiated using the `CRUD`
 const oddColumnsCRUD = entriesTable.generateCRUD(['column_1', 'column_3']);
 ```
 
+The CRUD operations `readById`, `deleteById` and `update` assume that an 'id' column is present and is the column to be used in the `WHERE` clause. If an alternative column is to be used, the relevant column name is passed as a string as the second argument.
+
+```js
+const oddColumnsCRUD = entriesTable.generateCRUD(['column_1', 'column_3'], 'column_2');
+```
+
 Each CRUD instance has a `label` property, a string created by hyphenating the column names passed. The instance is assigned to the `cruds` property on the Table instance with its `label` property as the key.
 
 Each CRUD instance also exposes a `summarize` method returning a string overview of a given operation, as well as a `summarizeAll' method returning all overviews for that operation set.
