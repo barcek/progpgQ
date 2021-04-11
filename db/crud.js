@@ -27,7 +27,7 @@ const buildPairString = crudColNames => {
     Constructor function
 */
 
-function CRUD(tableName, crudColNames, pool=defaultPool) {
+function CRUD(tableName, crudColNames, condColName='id', pool=defaultPool) {
 
     this.label = crudColNames.join('-');
 
@@ -41,7 +41,7 @@ function CRUD(tableName, crudColNames, pool=defaultPool) {
             expected: crudColNames.length
         },
         readById: {
-            text: `SELECT * FROM ${tableName} WHERE id = $1;`,
+            text: `SELECT * FROM ${tableName} WHERE ${condColName} = $1;`,
             expected: 1
         },
         readAll: {
@@ -49,11 +49,11 @@ function CRUD(tableName, crudColNames, pool=defaultPool) {
             expected: 0
         },
         update: {
-            text: `UPDATE ${tableName} SET ${this.pairString} WHERE id = $${crudColNames.length + 1} RETURNING *;`,
+            text: `UPDATE ${tableName} SET ${this.pairString} WHERE ${condColName} = $${crudColNames.length + 1} RETURNING *;`,
             expected: crudColNames.length + 1
         },
         deleteById: {
-            text: `DELETE FROM ${tableName} WHERE id = $1;`,
+            text: `DELETE FROM ${tableName} WHERE ${condColName} = $1;`,
             expected: 1
         },
         deleteAll: {

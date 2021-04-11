@@ -15,7 +15,7 @@ const { CRUD } = require(path.resolve(__dirname, '../../db/crud.js'));
 
 describe('CRUD', () => {
 
-    const CRUDInstanceResult = new CRUD(vals.table.name, vals.crud.colNames,
+    const CRUDInstanceResult = new CRUD(vals.table.name, vals.crud.colNames, 'id',
         poolCRUD);
 
     it('can be instantiated', () => {

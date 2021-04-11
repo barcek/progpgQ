@@ -23,8 +23,8 @@ function Table(tableName, tableColNames, pool=defaultPool, CRUD=defaultCRUD) {
     this.response = this.createTable(this.template);
     this.cruds = {};
 
-    this.generateCRUD = (crudColNames) => {
-        const crud = new CRUD(tableName, crudColNames);
+    this.generateCRUD = (crudColNames, condColName) => {
+        const crud = new CRUD(tableName, crudColNames, condColName);
         this.cruds[crud.label] = crud;
         return crud;
     };
