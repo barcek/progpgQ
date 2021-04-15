@@ -117,5 +117,6 @@ The '.env' file contains two sets of database environment variables with placeho
 
 The following are possible next steps in the development of the code base. Pull requests are welcome for these and any other potential improvements.
 
-- further generalize the current classes for greater flexibility
+- allow for multiple `WHERE` clause conditions and the full range of operators
+- enable the use of `OFFSET` and `LIMIT` and the ordering of rows returned
 - add additional query types
