@@ -15,8 +15,10 @@ A table can be created by creating an instance of the `Table` class, passing the
 - the name of the table as a string;
 - an array of strings, each containing the SQL for a single column.
 
+Note that the constructor function returns an asynchronous function, which resolves to the Table instance only after the response is received from the table creation query.
+
 ```js
-const entriesTable = new Table('entries', [
+const entriesTable = await new Table('entries', [
     'id SERIAL PRIMARY KEY',
     'column_1 VARCHAR(255) NOT NULL',
     'column_2 VARCHAR(255) NOT NULL',
