@@ -13,9 +13,9 @@ const { Table } = require(path.resolve(__dirname, '../../db/table.js'));
     Assertions
 */
 
-describe('Table', () => {
+describe('Table', async () => {
 
-    const TableInstanceResult = new Table(vals.table.name, vals.table.colNames,
+    const TableInstanceResult = await new Table(vals.table.name, vals.table.colNames,
         poolTable, CRUD);
 
     it('can be instantiated', () => {
@@ -35,11 +35,6 @@ describe('Table', () => {
             const tableCreationResult = await
                 TableInstanceResult.createTable(vals.table.template, poolTable);
             assert.include(tableCreationResult, vals.table.response);
-        });
-
-        it('adds a db response object to the "response" property', async () => {
-            const tableResponseResult = await TableInstanceResult.response;
-            assert.include(tableResponseResult, vals.table.response);
         });
     });
 

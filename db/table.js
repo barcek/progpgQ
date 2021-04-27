@@ -14,13 +14,13 @@ const { CRUD: defaultCRUD } = require(path.resolve(__dirname, './crud.js'));
 
 function Table(tableName, tableColNames, pool=defaultPool, CRUD=defaultCRUD) {
 
+    this.template = `CREATE TABLE IF NOT EXISTS ${tableName} (${commaSpaceJoin(tableColNames)});`;
+
     this.createTable = async (template) => {
         const response = await pool.query(template);
         return response;
     };
 
-    this.template = `CREATE TABLE IF NOT EXISTS ${tableName} (${commaSpaceJoin(tableColNames)});`;
-    this.response = this.createTable(this.template);
     this.cruds = {};
 
     this.generateCRUD = (crudColNames, condColName) => {
@@ -28,6 +28,11 @@ function Table(tableName, tableColNames, pool=defaultPool, CRUD=defaultCRUD) {
         this.cruds[crud.label] = crud;
         return crud;
     };
+
+    return (async function(instance) {
+        await instance.createTable(instance.template);
+        return instance;
+    })(this);
 };
 
 /*
