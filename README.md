@@ -8,6 +8,8 @@ In addition, the 'config' folder applies a useful destructure-truncate-export ap
 
 A major part of the code is currently used in the [docNxgres](https://github.com/barcek/docNxgres) containerized back end.
 
+For the whole at a glance, see [the current repository tree](#repository-tree).
+
 ## Getting started
 
 A table can be created by creating an instance of the `Table` class, passing the following:
@@ -122,3 +124,33 @@ The following are possible next steps in the development of the code base. Pull 
 - allow for multiple `WHERE` clause conditions and the full range of operators
 - enable the use of `OFFSET` and `LIMIT` and the ordering of rows returned
 - add additional query types
+
+## Repository tree
+
+```shell
+./
+├── config
+│   └── index.js
+├── db
+│   ├── crud.js
+│   ├── index.js
+│   ├── pool.js
+│   └── table.js
+├── test
+│   ├── db
+│   │   ├── crud.test.js
+│   │   ├── db.test.js
+│   │   └── table.test.js
+│   └── utils
+│       ├── format.test.js
+│       └── utils.test.js
+├── utils
+│   ├── format.js
+│   └── index.js
+├── .env
+├── .gitignore
+├── LICENSE.txt
+├── README.md
+├── package-lock.json
+└── package.json
+```
