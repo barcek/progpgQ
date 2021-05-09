@@ -127,7 +127,7 @@ The following are possible next steps in the development of the code base. Pull 
 
 ## Repository tree
 
-```shell
+```
 ./
 ├── config
 │   └── index.js
