@@ -1,9 +1,10 @@
 {
   "name": "progpgQ",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "programmatic queries",
   "main": "index.js",
   "scripts": {
+    "watch": "mocha --watch --parallel --recursive",
     "test": "mocha --recursive"
   },
   "keywords": [
