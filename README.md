@@ -63,10 +63,16 @@ The unit tests use the npm packages `mocha` and `chai` as dev dependencies and c
 mocha
 ```
 
-This command is the current content of the 'test' script in the 'package.json' file, which can be run with the following:
+This command along with the `--recursive` flag is the current content of the 'test' script in the 'package.json' file, which can be run with the following:
 
 ```shell
 npm test
+```
+
+The command in the 'watch' script is set up to watch for and test on changes:
+
+```shell
+npm run watch
 ```
 
 ## config/
