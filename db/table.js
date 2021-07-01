@@ -15,44 +15,45 @@ const { CRUD: defaultCRUD } = require(path.resolve(__dirname, './crud.js'));
 function Table(tableName, tableColNames, pool=defaultPool, CRUD=defaultCRUD) {
 
     /*
-        When called with the 'new' keyword returns a Promise,
-        resolving to the Table instance once the response is
-        received from pool.query in the .createTable method
+        class: Table
+
+        When called with the 'new' keyword returns a Promise
+        which, once the response is received from pool.query
+        in the .createTable method, resolves to the instance
 
         tableName:     string
         tableColNames: array of strings, SQL, one per column
+
+        On instantiation, creates in the database the table
+        'tableName' with columns defined in 'tableColNames'.
+
+        Exposes the .generateCRUD method, to generate a set
+        of CRUD queries for the columns of the table passed.
+
+        cf. CRUD class (./crud.js)
     */
 
-    /*
-        The table creation query for the parameters passed
-    */
     this.template = `CREATE TABLE IF NOT EXISTS ${tableName} (${commaSpaceJoin(tableColNames)});`;
 
+    this.createTable = async (template) => {
     /*
         Returns a Promise resolving to the response received
-        from pool.query called with the .template attribute
+        when calling pool.query with the .template attribute
     */
-    this.createTable = async (template) => {
         const response = await pool.query(template);
         return response;
     };
 
-    /*
-        A record of all CRUD instances, each keyed by label,
-        generated through calls to the .generateCRUD method
-    */
     this.cruds = {};
 
+    this.generateCRUD = (crudColNames, condColName) => {
     /*
         Returns a CRUD instance using the current table name
         and stores it keyed by label on the .cruds attribute
 
         crudColNames: array of strings, columns in query set
         condColName:  string, conditional column if not 'id'
-
-        cf. CRUD class (./crud.js)
     */
-    this.generateCRUD = (crudColNames, condColName) => {
         const crud = new CRUD(tableName, crudColNames, condColName);
         this.cruds[crud.label] = crud;
         return crud;

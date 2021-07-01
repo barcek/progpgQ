@@ -29,6 +29,27 @@ const buildPairString = crudColNames => {
 
 function CRUD(tableName, crudColNames, condColName='id', pool=defaultPool) {
 
+    /*
+        class: CRUD
+
+        tableName:    string, table in query set
+        crudColNames: array of strings, columns in query set
+        condColName:  string, conditional column if not 'id'
+
+        On instantiation, completes a query set, each an SQL
+        string for a CRUD operation on table 'tableName' for
+        the columns 'crudColNames', with 'condColName' being
+        the column referenced in each 'WHERE' clause present;
+        also sets a .label attribute for Table instance use.
+
+        Exposes the .summarize and .summarizeAll methods to
+        summarize a single CRUD operation or all operations.
+
+        Exposes the .run method to perform a CRUD operation.
+
+        cf. Table class (./table.js)
+    */
+
     this.label = crudColNames.join('-');
 
     this.colString = commaSpaceJoin(crudColNames);
@@ -63,12 +84,20 @@ function CRUD(tableName, crudColNames, condColName='id', pool=defaultPool) {
     };
 
     this.summarize = operation => {
+    /*
+        Returns a string summarizing a single CRUD operation.
+
+        operation:   string, key on the .templates attribute
+    */
         const expected = this.templates[operation].expected;
         const text = this.templates[operation].text;
         return `${tableName} ${this.label} '${operation}' expects ${expected} value(s) for query '${text}'`;
     };
 
     this.summarizeAll = () => {
+    /*
+        Returns a string summarizing all CRUD operations.
+    */
         const summaries = [];
         for (let key of Object.keys(this.templates)) {
             summaries.push(this.summarize(key));
@@ -77,6 +106,14 @@ function CRUD(tableName, crudColNames, condColName='id', pool=defaultPool) {
     };
 
     this.run = (operation, values=[]) => {
+    /*
+        Returns the response received when calling pool.query
+        with values on the .templates attribute for a given
+        operation and the corresponding set of parameters.
+
+        operation:   string, key on the .templates attribute
+        values:      array of strings, parameters for query
+    */
         if (this.templates[operation].expected != values.length) {
             throw new Error(`${this.summarize(operation)}, but received ${values.length}`)
         };
