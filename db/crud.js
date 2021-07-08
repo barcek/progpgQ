@@ -40,12 +40,12 @@ function CRUD(tableName, crudColNames, condColName='id', pool=defaultPool) {
         string for a CRUD operation on table 'tableName' for
         the columns 'crudColNames', with 'condColName' being
         the column referenced in each 'WHERE' clause present;
-        also sets a .label attribute for Table instance use.
+        also sets a .label attribute for Table instance use
 
         Exposes the .summarize and .summarizeAll methods to
-        summarize a single CRUD operation or all operations.
+        summarize a single CRUD operation or all operations
 
-        Exposes the .run method to perform a CRUD operation.
+        Exposes the .run method to perform a CRUD operation
 
         cf. Table class (./table.js)
     */
@@ -85,7 +85,7 @@ function CRUD(tableName, crudColNames, condColName='id', pool=defaultPool) {
 
     this.summarize = operation => {
     /*
-        Returns a string summarizing a single CRUD operation.
+        Returns a string summarizing a single CRUD operation
 
         operation:   string, key on the .templates attribute
     */
@@ -96,7 +96,7 @@ function CRUD(tableName, crudColNames, condColName='id', pool=defaultPool) {
 
     this.summarizeAll = () => {
     /*
-        Returns a string summarizing all CRUD operations.
+        Returns a string summarizing all CRUD operations
     */
         const summaries = [];
         for (let key of Object.keys(this.templates)) {
@@ -109,7 +109,7 @@ function CRUD(tableName, crudColNames, condColName='id', pool=defaultPool) {
     /*
         Returns the response received when calling pool.query
         with values on the .templates attribute for a given
-        operation and the corresponding set of parameters.
+        operation and the corresponding set of parameters
 
         operation:   string, key on the .templates attribute
         values:      array of strings, parameters for query

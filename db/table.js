@@ -25,10 +25,10 @@ function Table(tableName, tableColNames, pool=defaultPool, CRUD=defaultCRUD) {
         tableColNames: array of strings, SQL, one per column
 
         On instantiation, creates in the database the table
-        'tableName' with columns defined in 'tableColNames'.
+        'tableName' with columns defined in 'tableColNames'
 
         Exposes the .generateCRUD method, to generate a set
-        of CRUD queries for the columns of the table passed.
+        of CRUD queries for the columns of the table passed
 
         cf. CRUD class (./crud.js)
     */
