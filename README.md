@@ -2,11 +2,9 @@
 
 A fileset for programmatic table and CRUD query creation in Node.js using the `pg` package for PostgreSQL.
 
-All or part of the fileset can be incorporated into a larger project to abstract away the core query code.
+All or part can be incorporated into a larger project to abstract away the core query code. In addition, the 'config' folder applies a useful destructure-truncate-export approach to environment variables to reduce environment variable identifier length and uses `NODE_ENV` to determine the correct set of database environment variables.
 
-In addition, the 'config' folder applies a useful destructure-truncate-export approach to environment variables to reduce environment variable identifier length and uses `NODE_ENV` to determine the correct set of database environment variables.
-
-A major part of the code is currently used in the [docNxgres](https://github.com/barcek/docNxgres) containerized back end.
+A large part of the code is currently used in the [docNxgres](https://github.com/barcek/docNxgres) containerized back end.
 
 For the whole at a glance, see [the current repository tree](#repository-tree).
 
@@ -79,51 +77,53 @@ npm run watch
 
 The `npm audit` command can be used to run a security audit on the dependencies used, with the process returning information on updates where available. The command `npm audit fix` can be used instead or thereafter to install compatible updates. See the npm documentation for [more detail](https://docs.npmjs.com/auditing-package-dependencies-for-security-vulnerabilities).
 
-## config/
+## Content summary
+
+### config/
 
 The 'config' directory contains a single 'index.js' file.
 
-### index.js
+#### index.js
 
 The 'index.js' file requires the `dotenv` package, destructures environment variables from `process.env` - which draws also from the '.env' file in the root directory - and uses `NODE_ENV` to determine the correct set of database environment variables and export them with truncated identifiers under the `DB` key.
 
-## db/
+### db/
 
 The 'db' directory contains four files: 'index.js', 'pool.js', 'table.js' and 'crud.js'.
 
-### index.js
+#### index.js
 
 The 'index.js' file destructures `Table` and `pool` from their modules and exports the `Table` class and an `endPool` function.
 
-### pool.js
+#### pool.js
 
 The 'pool.js' file requires the `pg` package and the `DB` environment variables to create a pool exports this as `pool`.
 
-### crud.js
+#### crud.js
 
 The 'crud.js' file destructures `pool` from its module, as `defaultPool` to support dependency injection, and exports the constructor function `CRUD`, which takes arguments to create a set of standard CRUD queries, specifically `create`, `readById`, `readAll`, `update`, `deleteById` and `deleteAll`.
 
-### table.js
+#### table.js
 
 The 'table.js' file destructures `pool`  and `CRUD` from their modules, each with the 'default-' prefix to support dependency injection, and exports the constructor function `Table`, which takes arguments to create a table if the table does not exist.
 
-## utils/
+### utils/
 
 The 'utils' directory contains two files: 'index.js' and 'format.js'.
 
-### index.js
+#### index.js
 
 The 'index.js' file destructures the sole utility function from 'format.js' and exports it.
 
-### format.js
+#### format.js
 
 The 'format.js' file defines and exports a single utility function, `commaSpaceJoin`, currently used in both 'table.js' and 'crud.js'.
 
-## test/
+### test/
 
 The 'test' directory contains two subdirectories: 'db/' and 'utils/'. The subdirectory 'db/' contains three files: 'db.test.js' with test resources and one unit test file each for the `Table` and `CRUD` modules. The subdirectory 'utils/' contains two files: 'utils.test.js' with test resources and 'format.test.js' for the utility function in 'utils/format.js'.
 
-## .env
+### .env
 
 The '.env' file contains two sets of database environment variables with placeholder values, one set each for development and production.
 
