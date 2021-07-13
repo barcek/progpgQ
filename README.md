@@ -8,6 +8,18 @@ A large part of the code is currently used in the [docNxgres](https://github.com
 
 For the whole at a glance, see [the current repository tree](#repository-tree).
 
+- [Getting started](#getting-started)
+    - [Unit tests](#unit-tests)
+    - [npm audit](#npm-audit)
+- [Content summary](#content-summary)
+    - [config/](#config)
+    - [db/](#db)
+    - [utils/](#utils)
+    - [test/](#test)
+    - [.env](#env)
+- [Development plan](#development-plan)
+- [Repository tree](#repository-tree)
+
 ## Getting started
 
 A table can be created by creating an instance of the `Table` class, passing the following:
