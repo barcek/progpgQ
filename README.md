@@ -9,8 +9,6 @@ A large part of the code is currently used in the [docNxgres](https://github.com
 For the whole at a glance, see [the current repository tree](#repository-tree).
 
 - [Getting started](#getting-started)
-    - [Unit tests](#unit-tests)
-    - [npm audit](#npm-audit)
 - [Content summary](#content-summary)
     - [config/](#config)
         - [index.js](#indexjs)
@@ -24,6 +22,9 @@ For the whole at a glance, see [the current repository tree](#repository-tree).
         - [format.js](#formatjs)
     - [test/](#test)
     - [.env](#env)
+- [Making changes](#making-changes)
+    - [Unit tests](#unit-tests)
+    - [npm audit](#npm-audit)
 - [Development plan](#development-plan)
 - [Repository tree](#repository-tree)
 
@@ -71,30 +72,6 @@ A CRUD operation can be performed by calling the `run` method with the first arg
 ```js
 const response = await oddColumnsCRUD.run('create', ['value_1', 'value_3']);
 ```
-
-### Unit tests
-
-The unit tests use the npm packages `mocha` and `chai` as dev dependencies and can be run with the following command:
-
-```shell
-mocha
-```
-
-This command along with the `--recursive` flag is the current content of the 'test' script in the 'package.json' file, which can be run with the following:
-
-```shell
-npm test
-```
-
-The command in the 'watch' script is set up to watch for and test on changes:
-
-```shell
-npm run watch
-```
-
-### npm audit
-
-The `npm audit` command can be used to run a security audit on the dependencies used, with the process returning information on updates where available. The command `npm audit fix` can be used instead or thereafter to install compatible updates. See the npm documentation for [more detail](https://docs.npmjs.com/auditing-package-dependencies-for-security-vulnerabilities).
 
 ## Content summary
 
@@ -145,6 +122,34 @@ The 'test' directory contains two subdirectories: 'db/' and 'utils/'. The subdir
 ### .env
 
 The '.env' file contains two sets of database environment variables with placeholder values, one set each for development and production.
+
+## Making changes
+
+Running the tests after making changes and adding tests to cover new behaviour is recommended, as is a regular audit of dependencies.
+
+### Unit tests
+
+The unit tests use the npm packages `mocha` and `chai` as dev dependencies and can be run with the following command:
+
+```shell
+mocha
+```
+
+This command along with the `--recursive` flag is the current content of the 'test' script in the 'package.json' file, which can be run with the following:
+
+```shell
+npm test
+```
+
+The command in the 'watch' script is set up to watch for and test on changes:
+
+```shell
+npm run watch
+```
+
+### npm audit
+
+The `npm audit` command can be used to run a security audit on the dependencies used, with the process returning information on updates where available. The command `npm audit fix` can be used instead or thereafter to install compatible updates. See the npm documentation for [more detail](https://docs.npmjs.com/auditing-package-dependencies-for-security-vulnerabilities).
 
 ## Development plan
 
