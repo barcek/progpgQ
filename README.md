@@ -9,6 +9,10 @@ A large part of the code is currently used in the [docNxgres](https://github.com
 For the whole at a glance, see [the current repository tree](#repository-tree).
 
 - [Getting started](#getting-started)
+    - [Table creation](#table-creation)
+    - [CRUD generation](#crud-generation)
+    - [Running operations](#running-operations)
+    - [.summarize & .summarizeAll](#summarize--summarizeall)
 - [Content summary](#content-summary)
     - [config/](#config)
         - [index.js](#indexjs)
@@ -30,6 +34,8 @@ For the whole at a glance, see [the current repository tree](#repository-tree).
 
 ## Getting started
 
+### Table creation
+
 A table can be created by creating an instance of the `Table` class, passing the following:
 
 - the name of the table as a string;
@@ -46,6 +52,8 @@ const entriesTable = await new Table('entries', [
 ]);
 ```
 
+### CRUD generation
+
 A set of CRUD operations for the table can then be instantiated using the `CRUD` class, passing an array of strings, each string the name of a column in the table.
 
 ```js
@@ -60,17 +68,21 @@ const oddColumnsCRUD = entriesTable.generateCRUD(['column_1', 'column_3'], 'colu
 
 Each CRUD instance has a `label` property, a string created by hyphenating the column names passed. The instance is assigned to the `cruds` property on the Table instance with its `label` property as the key.
 
-Each CRUD instance also exposes a `summarize` method returning a string overview of a given operation, as well as a `summarizeAll` method returning all overviews for that operation set.
-
-```js
-oddColumnsCRUD.summarize('create');
-oddColumnsCRUD.summarizeAll();
-```
+### Running operations
 
 A CRUD operation can be performed by calling the `run` method with the first argument the operation name as a string and the second argument the array of expected values.
 
 ```js
 const response = await oddColumnsCRUD.run('create', ['value_1', 'value_3']);
+```
+
+### .summarize & .summarizeAll
+
+Each CRUD instance also exposes a `summarize` method returning a string overview of a given operation, as well as a `summarizeAll` method returning all overviews for that operation set.
+
+```js
+oddColumnsCRUD.summarize('create');
+oddColumnsCRUD.summarizeAll();
 ```
 
 ## Content summary
