@@ -60,7 +60,7 @@ const oddColumnsCRUD = entriesTable.generateCRUD(['column_1', 'column_3'], 'colu
 
 Each CRUD instance has a `label` property, a string created by hyphenating the column names passed. The instance is assigned to the `cruds` property on the Table instance with its `label` property as the key.
 
-Each CRUD instance also exposes a `summarize` method returning a string overview of a given operation, as well as a `summarizeAll' method returning all overviews for that operation set.
+Each CRUD instance also exposes a `summarize` method returning a string overview of a given operation, as well as a `summarizeAll` method returning all overviews for that operation set.
 
 ```js
 oddColumnsCRUD.summarize('create');
